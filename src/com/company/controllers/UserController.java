@@ -1,6 +1,6 @@
 package com.company.controllers;
 
-import com.company.entities.User;
+import com.company.entities.Stone;
 import com.company.repositories.interfaces.IUserRepository;
 
 import java.util.List;
@@ -14,7 +14,7 @@ public class UserController {
 
     public String createUser(String name, String surname, String gender) {
         boolean male = (gender.toLowerCase().equals("male"));
-        User user = new User(name, surname, male);
+        Stone user = new Stone(Stone_name, price_in_gr);
 
         boolean created = repo.createUser(user);
 
@@ -22,13 +22,13 @@ public class UserController {
     }
 
     public String getUser(int id) {
-        User user = repo.getUser(id);
+        Stone user = repo.getStone(id);
 
         return (user == null ? "User was not found!" : user.toString());
     }
 
     public String getAllUsers() {
-        List<User> users = repo.getAllUsers();
+        List<Stone> users = repo.getAllStones();
 
         return users.toString();
     }

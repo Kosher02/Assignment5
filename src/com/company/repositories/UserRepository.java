@@ -1,12 +1,11 @@
 package com.company.repositories;
 
 import com.company.data.interfaces.IDB;
-import com.company.entities.User;
+import com.company.entities.Stone;
 import com.company.repositories.interfaces.IUserRepository;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 public class UserRepository implements IUserRepository {
@@ -17,16 +16,16 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public boolean createUser(User user) {
+    public boolean createUser(Stone stone) {
         Connection con = null;
         try {
             con = db.getConnection();
             String sql = "INSERT INTO users(name,surname,gender) VALUES (?,?,?)";
             PreparedStatement st = con.prepareStatement(sql);
 
-            st.setString(1, user.getName());
-            st.setString(2, user.getSurname());
-            st.setBoolean(3, user.getGender());
+            st.setString(1, stone.getStone_name());
+            st.setInt(2, stone.getPrice_in_gr());
+
 
             boolean executed = st.execute();
             return executed;
@@ -45,7 +44,17 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public User getUser(int id) {
+    public Stone getStone(int id) {
+        return null;
+    }
+
+    @Override
+    public List<Stone> getAllStones() {
+        return null;
+    }
+
+    @Override
+    public Stone getUser(int id) {
         Connection con = null;
         try {
             con = db.getConnection();
@@ -56,12 +65,13 @@ public class UserRepository implements IUserRepository {
 
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                User user = new User(rs.getInt("id"),
+                Stone user = new Stone(rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("surname"),
                         rs.getBoolean("gender"));
 
-                return user;
+                Stone stone;
+                return stone;
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -78,7 +88,7 @@ public class UserRepository implements IUserRepository {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<Stone> getAllUsers() {
         Connection con = null;
         try {
             con = db.getConnection();
@@ -86,17 +96,16 @@ public class UserRepository implements IUserRepository {
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);
-            List<User> users = new ArrayList<>();
+            List<Stone> users = new ArrayList<>();
             while (rs.next()) {
-                User user = new User(rs.getInt("id"),
+                Stone user = new Stone(rs.getInt("id"),
                         rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getBoolean("gender"));
+                        rs.getString("price");
 
-                users.add(user);
+                users.add(Stone);
             }
 
-            return users;
+            return Stones;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         } catch (ClassNotFoundException e) {

@@ -1,11 +1,11 @@
 package com.company.repositories.interfaces;
 
-import com.company.entities.User;
+import com.company.entities.Stone;
 
 import java.util.List;
 
 public interface IUserRepository {
-    boolean createUser(User user);
-    User getUser(int id);
-    List<User> getAllUsers();
+    boolean createUser(Stone stone);
+    Stone getStone(int id);
+    List<Stone> getAllStones();
 }
